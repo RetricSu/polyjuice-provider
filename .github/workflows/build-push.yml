@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  TEST_ETH_ADDRESS: 0xFb2C72d3ffe10Ef7c9960272859a23D24db9e04A
+  TEST_ETH_PRIVATE_KEY: 0xcd277d1a87ffc737b01f6f079a721fe34910b673755130399ea379200a6ef9f2
+  WEB3_URL: http://localhost:8024
+  WEB3_WS_URL: ws://localhost:8024/ws
+
 jobs:
   docker-build-push:
     runs-on: ubuntu-latest
@@ -33,6 +39,9 @@ jobs:
       - name: make sure kicker is starting..
         run: cd tools/kicker && make start
       
+      - name: deposit account
+        run: curl http://localhost:6101/deposit?eth_address=${{ env.TEST_ETH_ADDRESS }}
+
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
@@ -49,7 +58,20 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: build and test
-        run: yarn && yarn build && yarn test
+        run: yarn && yarn build 
+      
+      - name: setup .env for test
+        run: | 
+        cat > $1 <<EOF \
+WEB3_JSON_RPC=${{ env.WEB3_URL }}\
+WEB3_WS_JSON_RPC=${{ env.WEB3_URL }}\
+PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }} \
+ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }} \
+EOF \
+yarn paste-env
+
+      - name: run test
+        run: yarn test
 
       # Login npm
       # - name: Log into registry ${{ env.REGISTRY }}
