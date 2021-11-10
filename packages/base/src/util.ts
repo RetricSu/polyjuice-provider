@@ -743,6 +743,7 @@ export class Godwoker {
       args: this.rollup_type_hash + eth_address.slice(2),
     };
     const lock_hash = utils.computeScriptHash(layer2_lock);
+    console.log(JSON.stringify(layer2_lock, null, 2), lock_hash);
     const errorWhenNoResult = `unable to fetch account id from ${eth_address}, lock_hash is ${lock_hash}`;
     return this.jsonRPC(
       "gw_get_account_id_by_script_hash",
