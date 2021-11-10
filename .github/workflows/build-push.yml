@@ -23,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: setup .env for test
+      - name: setup .test.env for test
         run: |
           cat << EOF > .test.env
           WEB3_JSON_RPC=${{ env.WEB3_URL }}
@@ -31,7 +31,7 @@ jobs:
           PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }}
           ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }}
           EOF 
-          yarn paste-e
+          yarn paste-env
 
       - name: Clone kicker repository
         uses: actions/checkout@v2
