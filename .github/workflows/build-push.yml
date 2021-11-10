@@ -31,9 +31,7 @@ jobs:
           PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }}
           ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }}
           EOF
-      
-      - name: paste .test.env for all workspace tests
-        run: yarn paste-env
+          yarn paste-env
 
       - name: Clone kicker repository
         uses: actions/checkout@v2
