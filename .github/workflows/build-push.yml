@@ -43,7 +43,7 @@ jobs:
           ref: master
 
       - name: Cache Kicker devnet data
-        uses: actions/cache@v2
+        uses: john-shaffer/cache@sudo-tar
         env:
           cache-name: cache-kicker-devnet
         with:
