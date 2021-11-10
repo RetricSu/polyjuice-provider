@@ -1,10 +1,10 @@
 on:
   push:
-    branches: [ main, "add-build-ci" ]
+    branches: [main, "add-build-ci"]
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: ["v*.*.*"]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   TEST_ETH_ADDRESS: 0xFb2C72d3ffe10Ef7c9960272859a23D24db9e04A
@@ -29,22 +29,22 @@ jobs:
           repository: RetricSu/godwoken-kicker
           path: tools/kicker/
           ref: master
-        
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-        
+
       - name: start kicker
         run: cd tools/kicker && make init && make start
 
       - name: make sure kicker is starting..
         run: cd tools/kicker && make start
-      
+
       - name: deposit account
         run: curl http://localhost:6101/deposit?eth_address=${{ env.TEST_ETH_ADDRESS }}
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -58,10 +58,10 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: build and test
-        run: yarn && yarn build 
-      
+        run: yarn && yarn build
+
       - name: setup .env for test
-        run: | 
+        run: |
           cat > .test.env <<EOF \
           WEB3_JSON_RPC=${{ env.WEB3_URL }}\
           WEB3_WS_JSON_RPC=${{ env.WEB3_URL }}\
