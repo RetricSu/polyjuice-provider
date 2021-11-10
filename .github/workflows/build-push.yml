@@ -28,7 +28,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
         
       - name: start kicker
-        run: cd tools/kicker/godwoken-kicker && make init && make start
+        run: cd tools/kicker && make init && make start
       
       - uses: actions/setup-node@v2
         with:
