@@ -23,6 +23,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: setup .env for test
+        run: |
+          cat << EOF > .test.env
+          WEB3_JSON_RPC=${{ env.WEB3_URL }}
+          WEB3_WS_JSON_RPC=${{ env.WEB3_URL }}
+          PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }}
+          ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }}
+          EOF 
+          yarn paste-e
+
       - name: Clone kicker repository
         uses: actions/checkout@v2
         with:
@@ -58,20 +68,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: build and test
-        run: yarn && yarn build
-
-      - name: setup .env for test
-        run: |
-          cat > .test.env <<EOF \
-          WEB3_JSON_RPC=${{ env.WEB3_URL }}\
-          WEB3_WS_JSON_RPC=${{ env.WEB3_URL }}\
-          PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }} \
-          ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }} \
-          EOF \
-          yarn paste-env
-
-      - name: run test
-        run: yarn test
+        run: yarn && yarn build && yarn test
 
       # Login npm
       # - name: Log into registry ${{ env.REGISTRY }}
