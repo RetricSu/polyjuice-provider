@@ -17,7 +17,7 @@ jobs:
   integration-test-publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: riad
+      contents: read
       packages: write
 
     steps:
