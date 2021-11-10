@@ -24,13 +24,13 @@ jobs:
         uses: actions/checkout@v2
         
       - shell: bash
-      run: |
-        cat << EOF > .test.env
-        WEB3_JSON_RPC=${{ env.WEB3_URL }}
-        WEB3_WS_JSON_RPC=${{ env.WEB3_URL }}
-        PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }}
-        ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }}
-        EOF
+        run: |
+          cat << EOF > .test.env
+          WEB3_JSON_RPC=${{ env.WEB3_URL }}
+          WEB3_WS_JSON_RPC=${{ env.WEB3_URL }}
+          PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }}
+          ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }}
+          EOF
       
       - name: paste .test.env for all workspace tests
         run: yarn paste-env
