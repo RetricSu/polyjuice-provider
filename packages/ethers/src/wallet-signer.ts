@@ -99,6 +99,8 @@ export class PolyjuiceWallet extends Wallet {
         gas: hexlify(tx.gasLimit || POLY_MAX_TRANSACTION_GAS_LIMIT),
         gasPrice: hexlify(tx.gasPrice || POLY_MIN_GAS_PRICE),
       };
+      console.log(JSON.stringify(t, null, 2));
+      console.log("godwoker script hash", this.godwoker.rollup_type_hash);
       const that = this;
       const signingMethod = function (message: string) {
         return joinSignature(that._signingKey().signDigest(message));
