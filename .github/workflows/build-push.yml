@@ -62,13 +62,13 @@ jobs:
       
       - name: setup .env for test
         run: | 
-        cat > $1 <<EOF \
-WEB3_JSON_RPC=${{ env.WEB3_URL }}\
-WEB3_WS_JSON_RPC=${{ env.WEB3_URL }}\
-PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }} \
-ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }} \
-EOF \
-yarn paste-env
+          cat > .test.env <<EOF \
+          WEB3_JSON_RPC=${{ env.WEB3_URL }}\
+          WEB3_WS_JSON_RPC=${{ env.WEB3_URL }}\
+          PRIVATE_KEY=${{ env.TEST_ETH_PRIVATE_KEY }} \
+          ETH_ADDRESS=${{ env.TEST_ETH_ADDRESS }} \
+          EOF \
+          yarn paste-env
 
       - name: run test
         run: yarn test
