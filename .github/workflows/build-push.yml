@@ -45,28 +45,24 @@ jobs:
       - name: Cache Kicker devnet data
         uses: john-shaffer/cache@sudo-tar
         env:
-          cache-name: cache-kicker-devnet
+          cache-name: kicker-cache-devnet
         with:
           # kicker cache files are stored in `cache`
           path: tools/kicker/cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('tools/kicker/docker/.build.mode.env') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('tools/kicker/docker/.build.mode.env') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: Cache Kicker workspace
         uses: actions/cache@v2
         env:
-          cache-name: cache-kicker-workspace
+          cache-name: kicker-cache-workspace
         with:
           # kicker workspace files are stored in `workspace`
           path: tools/kicker/workspace
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('tools/kicker/docker/.build.mode.env') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('tools/kicker/docker/.build.mode.env') }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
