@@ -29,6 +29,9 @@ jobs:
         
       - name: start kicker
         run: cd tools/kicker && make init && make start
+
+      - name: make sure kicker is starting..
+        run: cd tools/kicker && make start
       
       - uses: actions/setup-node@v2
         with:
@@ -46,7 +49,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: build and test
-        run: yarn build && yarn test
+        run: yarn && yarn build && yarn test
 
       # Login npm
       # - name: Log into registry ${{ env.REGISTRY }}
@@ -87,7 +90,7 @@ jobs:
       #     tags: ${{ steps.meta.outputs.tags }}
       #     labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 30
+      # - name: Setup tmate session
+      #   if: ${{ failure() }}
+      #   uses: mxschmitt/action-tmate@v3
+      #   timeout-minutes: 30
