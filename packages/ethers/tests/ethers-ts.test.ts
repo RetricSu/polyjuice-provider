@@ -228,6 +228,8 @@ test.serial("test_error_receipt_contract", async (t) => {
   const txReceipt = await res.wait();
   t.is(txReceipt.contractAddress.slice(0, 2), "0x");
 
+  console.log("address", txReceipt.contractAddress);
+
   const contract = new Contract(
     txReceipt.contractAddress,
     errorReceiptContract.abi,
