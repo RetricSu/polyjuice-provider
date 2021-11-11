@@ -923,6 +923,7 @@ export class Godwoker {
   async assembleRawL2Transaction(
     eth_tx: EthTransaction
   ): Promise<RawL2Transaction> {
+    console.log("assemble tx", eth_tx);
     const from = await this.getAccountIdByEoaEthAddress(eth_tx.from);
     const to = await this.allTypeEthAddressToAccountId(eth_tx.to);
     const nonce = await this.getNonce(parseInt(from));
