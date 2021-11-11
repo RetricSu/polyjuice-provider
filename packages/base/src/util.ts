@@ -1256,6 +1256,7 @@ export class Godwoker {
       _address,
       setScriptHash
     );
+    console.log("get contract short address:", script_hash, _address);
     if (is_contract_address) {
       // below the getScriptHashByShortAddress request is no need
       // since we have pass callback fn to get ScriptHash value
@@ -1265,6 +1266,7 @@ export class Godwoker {
 
     // otherwise, assume it is EOA address
     script_hash = this.computeScriptHashByEoaEthAddress(_address);
+    console.log("compute eoa script hash:", script_hash, _address);
     const accountId = await this.getAccountIdByScriptHash(script_hash);
     return accountId;
   }

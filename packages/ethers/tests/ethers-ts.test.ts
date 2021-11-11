@@ -243,6 +243,7 @@ test.serial("test_error_receipt_contract", async (t) => {
     }
   };
   const callRevertRunResult = await t.throwsAsync(callRevert);
+  console.log("callRevertRunResult", callRevertRunResult)
   t.is(callRevertRunResult.message, "revert: you trigger crying value!");
   const sendRevert = async () => {
     try {
